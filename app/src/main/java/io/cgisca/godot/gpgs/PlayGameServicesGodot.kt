@@ -33,6 +33,7 @@ import org.godotengine.godot.BuildConfig
 import org.godotengine.godot.Godot
 import org.godotengine.godot.plugin.GodotPlugin
 import org.godotengine.godot.plugin.SignalInfo
+import org.godotengine.godot.plugin.UsedByGodot
 import java.math.BigInteger
 import java.util.Random
 
@@ -173,8 +174,9 @@ class PlayGameServicesGodot(godot: Godot) : GodotPlugin(godot), AchievementsList
         }
     }
 
+    @UsedByGodot
     fun isGooglePlayServicesAvailable(): Boolean {
-        val result: Int = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(godot.activity as Activity)
+        val result: Int = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(activity as Activity)
         return result == ConnectionResult.SUCCESS
     }
 
@@ -186,6 +188,7 @@ class PlayGameServicesGodot(godot: Godot) : GodotPlugin(godot), AchievementsList
         initialize(true, enablePopups, saveGameName, requestEmail, requestProfile, requestToken)
     }
 
+    @UsedByGodot
     private fun initialize(enableSaveGamesFunctionality: Boolean, enablePopups: Boolean, saveGameName: String,
                            requestEmail: Boolean, requestProfile: Boolean, requestToken: String) {
         Log.i("godot","Initalizing PGSGP")
@@ -206,16 +209,16 @@ class PlayGameServicesGodot(godot: Godot) : GodotPlugin(godot), AchievementsList
             signInOptionsBuilder.build()
         }
 
-        connectionController = ConnectionController(godot.activity as Activity, signInOptions)
-        signInController = SignInController(godot.activity as Activity, this, connectionController)
-        achievementsController = AchievementsController(godot.activity as Activity, this, connectionController)
-        leaderboardsController = LeaderboardsController(godot.activity as Activity, this, connectionController)
-        eventsController = EventsController(godot.activity as Activity, this, connectionController)
-        playerStatsController = PlayerStatsController(godot.activity as Activity, this, connectionController)
-        playerInfoController = PlayerInfoController(godot.activity as Activity, this, connectionController)
-        savedGamesController = SavedGamesController(godot.activity as Activity, this, connectionController)
+        connectionController = ConnectionController(activity as Activity, signInOptions)
+        signInController = SignInController(activity as Activity, this, connectionController)
+        achievementsController = AchievementsController(activity as Activity, this, connectionController)
+        leaderboardsController = LeaderboardsController(activity as Activity, this, connectionController)
+        eventsController = EventsController(activity as Activity, this, connectionController)
+        playerStatsController = PlayerStatsController(activity as Activity, this, connectionController)
+        playerInfoController = PlayerInfoController(activity as Activity, this, connectionController)
+        savedGamesController = SavedGamesController(activity as Activity, this, connectionController)
 
-        googleSignInClient = GoogleSignIn.getClient(godot.activity as Activity, signInOptions)
+        googleSignInClient = GoogleSignIn.getClient(activity as Activity, signInOptions)
 
         runOnUiThread {
             Log.i("godot","enabling popups : " + enablePopups)
