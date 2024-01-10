@@ -1,0 +1,9 @@
+fc8a56933c4b1c8d796fdb8f7a9f9475
+::res://::1702596484
+default_env.tres::Environment::7320405130395360267::1702584392::0::1::::<><>::
+export_presets.cfg::TextFile::-1::1702584392::0::1::::<><>::
+icon.png::CompressedTexture2D::3862030852739452089::1702584392::1702596485::1::::<><>::
+Main.gd::GDScript::-1::1702584392::0::1::::<>Control<>::
+Main.tscn::PackedScene::5502894033822799824::1702584392::0::1::::<><>::res://Main.gd
+::res://android/::1702584392
+::res://android/plugins/::1702596448

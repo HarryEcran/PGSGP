@@ -51,7 +51,9 @@ class SignInController(
                         }
 
                         signInListener.onSignedInSuccessfully(userProfile)
+                        Log.i("godot","DebugHarry Signal send succesfully")
                         enablePopUps()
+                        Log.i("godot","DebugHarry Done with popup function")
                     } else {
                         val intent = googleSignInClient.signInIntent
                         activity.startActivityForResult(intent, RC_SIGN_IN)
