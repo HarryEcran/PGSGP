@@ -292,9 +292,9 @@ class PlayGameServicesGodot(godot: Godot) : GodotPlugin(godot), AchievementsList
     }
 
     @UsedByGodot
-    fun showLeaderBoard(leaderBoardId: String) {
+    fun showLeaderBoard(leaderBoardId: String, span: String, leaderboardCollection: String) {
         runOnUiThread {
-            leaderboardsController.showLeaderboard(leaderBoardId)
+            leaderboardsController.showLeaderboard(leaderBoardId, span, leaderboardCollection)
         }
     }
 

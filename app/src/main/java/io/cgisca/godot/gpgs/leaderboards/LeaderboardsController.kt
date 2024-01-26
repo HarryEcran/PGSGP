@@ -89,11 +89,26 @@ class LeaderboardsController(
         }
     }
 
-    fun showLeaderboard(leaderboardId: String) {
+    fun showLeaderboard(leaderboardId: String, span: String, leaderboardCollection: String) {
         val googleSignInAccount = GoogleSignIn.getLastSignedInAccount(activity)
+
+        var collection = COLLECTION_PUBLIC
+
+        if (leaderboardCollection.lowercase(Locale.ROOT).contains("friends")) {
+            collection = COLLECTION_FRIENDS
+        }
+
+        var finalSpan = TIME_SPAN_ALL_TIME;
+
+        if (span.lowercase(Locale.ROOT).contains("weekly")) {
+            finalSpan = TIME_SPAN_WEEKLY
+        } else if (span.lowercase(Locale.ROOT).contains("daily")) {
+            finalSpan = TIME_SPAN_DAILY
+        }
+
         if (connectionController.isConnected().first && googleSignInAccount != null) {
             Games.getLeaderboardsClient(activity, googleSignInAccount)
-                .getLeaderboardIntent(leaderboardId)
+                .getLeaderboardIntent(leaderboardId, finalSpan, collection)
                 .addOnSuccessListener { intent -> activity.startActivityForResult(intent, RC_LEADERBOARD_UI) }
         }
     }
